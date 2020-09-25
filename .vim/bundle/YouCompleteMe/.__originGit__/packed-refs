@@ -1,0 +1,8 @@
+# pack-refs with: peeled fully-peeled sorted 
+29f7acf068d551524a75318398052405502ee471 refs/remotes/origin/auto
+6c9cdd7358381d0e2897fe805a29c240a92e98d4 refs/remotes/origin/azure-pipelines
+f6178c5a9d655f7c266b2fbb1d68844bc812d01a refs/remotes/origin/ci-vim-coverage
+d441d7003184b33c2f89f50d02b7fda93cc911ce refs/remotes/origin/gh-pages
+c5f950065dbaaa0c9ab8d6ee4430308406a71f5b refs/remotes/origin/legacy-py2
+4891999f055167cf845671c231d7740c104074bd refs/remotes/origin/master
+78dbf9be12b8a04a629e7780c834c67dc32befcd refs/remotes/origin/no-webhook
