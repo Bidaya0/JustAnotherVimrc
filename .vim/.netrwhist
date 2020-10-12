@@ -1,5 +1,12 @@
 let g:netrw_dirhistmax  =10
 let g:netrw_dirhistcnt =3
-let g:netrw_dirhist_3='/home/xianzelin/vimsettings/.vim/bundle'
-let g:netrw_dirhist_2='/home/xianzelin/randscd'
-let g:netrw_dirhist_1='/etc/xdg/lxqt/globalkeyshortcuts.conf'
+let g:netrw_dirhist_3='/home/bidaya0/pyscripts'
+let g:netrw_dirhist_2='/home/bidaya0/zuiyouhua'
+let g:netrw_dirhist_1='/home/bidaya0'
+let g:netrw_dirhist_0='/home/bidaya0/pyscripts'
+let g:netrw_dirhist_9='/home/bidaya0/zuiyouhua'
+let g:netrw_dirhist_8='/home/bidaya0'
+let g:netrw_dirhist_7='/home/bidaya0/pyscripts'
+let g:netrw_dirhist_6='/home/bidaya0/zuiyouhua'
+let g:netrw_dirhist_5='/home/bidaya0'
+let g:netrw_dirhist_4='/home/bidaya0/pyscripts'
