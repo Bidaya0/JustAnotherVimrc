@@ -13,18 +13,17 @@ set fencs=utf8,gbk,gb2312,gb18030
 
 
 set nocompatible              " be iMproved, required
-filetype off                  " required
+"filetype off                  " required
 
 "my setting
 set nu
-syntax on
-set tabstop=4 softtabstop=4
+set tabstop=2 softtabstop=2
 set smartindent
 set smartcase
 set incsearch
 set nowrap
 set noswapfile
-
+filetype plugin indent on
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -67,11 +66,77 @@ Plugin 'skywind3000/vim-terminal-help'
 "autocomplete
 Plugin 'Valloric/YouCompleteMe'
 "Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+Plugin 'elixir-editors/vim-elixir'
+
+"Plugin 'vim-syntastic/syntastic'
+Plugin 'mtscout6/syntastic-local-eslint.vim'
+Plugin 'nvie/vim-flake8'
+Plugin 'dense-analysis/ale'
+
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+" Add maktaba and codefmt to the runtimepath.
+" (The latter must be installed before it can be used.)
+Plugin 'google/vim-maktaba'
+Plugin 'google/vim-codefmt'
+" Also add Glaive, which is used to configure codefmt's maktaba flags. See
+" `:help :Glaive` for usage.
+"Plugin 'google/vim-glaive'
+
+Plugin 'terryma/vim-multiple-cursors'
+
+"like ctrlp
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+
+"Plugin 'honza/vim-snippets'
+
+"fold
+Plugin 'pseewald/vim-anyfold'
+
+"git
+Plugin 'airblade/vim-gitgutter'
+
+"REPL
+Plugin 'rhysd/reply.vim'
+"rainbow ()
+Plugin 'luochen1990/rainbow'
+
+Plugin 'ekalinin/Dockerfile.vim'
+
+Plugin 'tpope/vim-surround'
+
+"Plugin 'goerz/jupytext.vim'
+"Plugin 'szymonmaszke/vimpyter'
+
+"Debugger
+"Plugin 'puremourning/vimspector'
+
+"templates 
+Plugin 'tibabit/vim-templates'
 
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_python_python_exec = 'python3'
+"let g:syntastic_python_checkers = ['pylint' ,  'pyflakes']
+"let g:syntastic_python_checkers = ['pyflakes']
+"let g:syntastic_aggregate_errors = 1
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_javascript_checkers = ['jslint', 'eslint']
+"let g:syntastic_enable_signs=1
+
+"let g:syntastic_javascript_eslint_exe = 'npm run lint --'
+
+syntax on
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
@@ -109,6 +174,78 @@ endfunction
 " Add your own mapping. For example:
 noremap <silent> <C-B> :call ToggleNetrw()<CR>
 
+"ale settings
+let g:ale_sign_error = '.X'
+let g:ale_sign_warning = '.W'
+let g:airline#extensions#ale#enabled = 1
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_lint_on_enter = 0
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+let g:ale_linters = {'python': ['flake8', 'pylint']}
+noremap <F2> :ALEToggle<CR>
+noremap <F3> :FormatLines<CR>
+noremap <F4> :Repl<CR>
+
+
+
+
+
+
+let g:rainbow_active = 1
+"call maktaba#plugin#Install(maktaba#path#Join([maktaba#Maktaba().location]))
+"call glaive#Install()
+"Glaive codefmt plugin[mappings]
+"augroup autoformat_settings
+"  "autocmd FileType bzl AutoFormatBuffer buildifier
+"  autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
+"  "autocmd FileType dart AutoFormatBuffer dartfmt
+"  "autocmd FileType go AutoFormatBuffer gofmt
+"  "autocmd FileType gn AutoFormatBuffer gn
+"  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+"  "autocmd FileType java AutoFormatBuffer google-java-format
+"  autocmd FileType python AutoFormatBuffer yapf
+"  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+"  autocmd FileType rust AutoFormatBuffer rustfmt
+"  autocmd FileType vue AutoFormatBuffer prettier
+"augroup END
+
+autocmd Filetype * AnyFoldActivate               " activate for all filetypes
+" or
+"autocmd Filetype .py AnyFoldActivate " activate for a specific filetype
+
+"set foldlevel=0  " close all folds
+" or
+set foldlevel=99 " Open all folds
+
+"vimspector
+"let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
+
+
+" jupyternotebook
+"let g:jupytext_command = 'notedown'
+"let g:jupytext_fmt = 'markdown'
+"let g:jupytext_to_ipynb_opts = '--to=notebook'
+"let g:vimpyter_color = 1
+"let g:vimpyter_jupyter_notebook_flags = '--browser=msedge --port=8855'
+"let g:vimpyter_nteract_flags = '--browser=msedge --port=8855'
+"let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes':   [],'passive_filetypes': [] }
+"noremap <F3> :SyntasticReset<CR>
+"noremap <F2> :SyntasticCheck<CR>
+"function! ToggleSyntastic()
+"    for i in range(1, winnr('$'))
+"        let bnum = winbufnr(i)
+"        if getbufvar(bnum, '&buftype') == 'quickfix'
+"            lclose
+"            return
+"        endif
+"    endfor
+"    SyntasticCheck
+"endfunction
+"
+"nnoremap <silent><F2> :call ToggleSyntastic()<CR>
 "let g:coc_global_extensions = ['coc-json','coc-python']
 
 "augroup ProjectDrawer

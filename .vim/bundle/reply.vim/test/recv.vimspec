@@ -1,0 +1,89 @@
+Describe :ReplRecv
+    Before each
+        call Cleanup()
+    End
+
+    It extracts user input from terminal window
+        let b = bufnr('%')
+        Repl node
+        Assert True(WithTimeout(1, {-> getline('.') !=# ''}))
+        execute bufwinnr(b) . 'wincmd w'
+
+        call TermSendkeys(TermList()[0], "1 + 1\<CR>\<CR>1 +\<CR>1\<CR>")
+        call WithTimeout(1, {-> len(getbufline(1, '$')) >= 7})
+
+        ReplRecv
+
+        let expected = [
+            \   '',
+            \   '1 + 1',
+            \   '1 +',
+            \   '1',
+            \ ]
+        Assert Equals(getline(1, '$'), expected)
+    End
+
+    It formats appended lines using `==`
+        setlocal et tabstop=4 shiftwidth=4 softtabstop=4
+        set ft=javascript
+        let b = bufnr('%')
+        Repl node
+        Assert True(WithTimeout(1, {-> getline('.') !=# ''}))
+        execute bufwinnr(b) . 'wincmd w'
+
+        call TermSendkeys(TermList()[0], "function foo() {\<CR>return 'foo';\<CR>}\<CR>")
+        call WithTimeout(1, {-> len(getbufline(1, '$')) >= 5})
+
+        ReplRecv
+
+        let expected = [
+            \   '',
+            \   'function foo() {',
+            \   "    return 'foo';",
+            \   '}',
+            \ ]
+        Assert Equals(getline(1, '$'), expected)
+    End
+
+    It sends user input to buffer in terminal window
+        let from = bufnr('%')
+        Repl node
+        Assert True(WithTimeout(1, {-> getline('.') !=# ''}))
+
+        call TermSendkeys(bufnr('%'), "1 + 1\<CR>\<CR>1 +\<CR>1\<CR>")
+        call WithTimeout(1, {-> len(getbufline(1, '$')) >= 7})
+
+        ReplRecv
+
+        let expected = [
+            \   '',
+            \   '1 + 1',
+            \   '1 +',
+            \   '1',
+            \ ]
+        Assert Equals(getbufline(from, 1, '$'), expected)
+    End
+
+    It sends user input to buffer in terminal window
+        let from = bufnr('%')
+        Repl node
+        Assert True(WithTimeout(1, {-> getline('.') !=# ''}))
+
+        call TermSendkeys(bufnr('%'), "1 + 1\<CR>\<CR>1 +\<CR>1\<CR>")
+        call WithTimeout(1, {-> len(GetTermLine(bufnr('%'), 1, '$')) >= 7})
+
+        " XXX: Cannot test :ReplRecv for this case since Vim script cannot
+        " leave from Terminal-Job mode. Instead, testing the case by calling
+        " reply#command#recv() directly.
+        let l = TermLastLine()
+        " Specify only line '> 1 +' and line '... 1'
+        call reply#command#recv(1, l-3, l-2)
+
+        let expected = [
+            \   '',
+            \   '1 +',
+            \   '1',
+            \ ]
+        Assert Equals(getbufline(from, 1, '$'), expected)
+    End
+End

@@ -1,0 +1,324 @@
+*codefmt.txt*	Syntax-aware code formatting for a variety of languages
+Google                                                               *codefmt*
+
+==============================================================================
+CONTENTS                                                    *codefmt-contents*
+  1. Introduction..............................................|codefmt-intro|
+  2. Formatters...........................................|codefmt-formatters|
+  3. Configuration............................................|codefmt-config|
+  4. Commands...............................................|codefmt-commands|
+  5. Autocommands...........................................|codefmt-autocmds|
+  6. Mappings...............................................|codefmt-mappings|
+      1. Recommended zprint mappings.................|codefmt-mappings-zprint|
+  7. Dictionaries..............................................|codefmt-dicts|
+  8. Functions.............................................|codefmt-functions|
+
+==============================================================================
+INTRODUCTION                                                   *codefmt-intro*
+
+Provides a |:FormatCode| command to intelligently reformat code.
+
+==============================================================================
+FORMATTERS                                                *codefmt-formatters*
+
+This plugin has three built-in formatters: clang-format, gofmt, and autopep8.
+More formatters can be registered by other plugins that integrate with
+codefmt.
+
+DEFAULT FORMATTERS
+Codefmt will automatically use a default formatter for certain filetypes if
+none is explicitly supplied via an explicit arg to |:FormatCode| or the
+|b:codefmt_formatter| variable. The default formatter may also depend on what
+plugins are enabled or what other software is installed on your system.
+
+The current list of defaults by filetype is:
+  * bzl (Bazel): buildifier
+  * c, cpp, proto, javascript, typescript: clang-format
+  * clojure: cljstyle, zprint
+  * dart: dartfmt
+  * fish: fish_indent
+  * gn: gn
+  * go: gofmt
+  * java: google-java-format
+  * javascript, json, html, css: js-beautify
+  * javascript, html, css, markdown: prettier
+  * lua: luaformatterfiveone
+  * nix: nixpkgs-fmt
+  * python: autopep8, black, yapf
+  * rust: rustfmt
+  * sh: shfmt
+
+==============================================================================
+CONFIGURATION                                                 *codefmt-config*
+
+This plugin uses maktaba flags for configuration. Install Glaive
+(https://github.com/google/glaive) and use the |:Glaive| command to configure
+them.
+
+                                                 *codefmt:autopep8_executable*
+The path to the autopep8 executable.
+Default: 'autopep8' `
+
+                                             *codefmt:clang_format_executable*
+The path to the clang-format executable. String, list, or callable that takes
+no args and returns a string or a list.
+Default: 'clang-format' `
+
+                                                  *codefmt:clang_format_style*
+Formatting style for clang-format to use. Either a string or callable that
+takes no args and returns a style name for the current buffer. See
+http://clang.llvm.org/docs/ClangFormatStyleOptions.html for details.
+Default: 'file' `
+
+                                                    *codefmt:gofmt_executable*
+The path to the gofmt executable. For example, this can be changed to
+"goimports" (https://godoc.org/golang.org/x/tools/cmd/goimports) to
+additionally adjust imports when formatting.
+Default: 'gofmt' `
+
+                                                  *codefmt:dartfmt_executable*
+The path to the dartfmt executable.
+Default: 'dartfmt' `
+
+                                              *codefmt:js_beautify_executable*
+The path to the js-beautify executable.
+Default: 'js-beautify' `
+
+                                                     *codefmt:yapf_executable*
+The path to the yapf executable.
+Default: 'yapf' `
+
+                                                    *codefmt:black_executable*
+The path to the black executable.
+Default: 'black' `
+
+                                                       *codefmt:gn_executable*
+The path to the gn executable.
+Default: 'gn' `
+
+                                               *codefmt:buildifier_executable*
+The path to the buildifier executable.
+Default: 'buildifier' `
+
+                                              *codefmt:google_java_executable*
+The path to the google-java executable.  Generally, this should have the form:
+`java -jar /path/to/google-java`
+Default: 'google-java-format' `
+
+                                                       *codefmt:shfmt_options*
+Command line arguments to feed shfmt. Either a list or callable that takes no
+args and returns a list with command line arguments. By default, uses the
+Google's style. See https://github.com/mvdan/sh for details.
+Default: ['-i', '2', '-sr', '-ci'] `
+
+                                                    *codefmt:shfmt_executable*
+The path to the shfmt executable. String, list, or callable that takes no args
+and returns a string or a list.
+Default: 'shfmt' `
+
+                                                    *codefmt:prettier_options*
+Command line arguments to feed prettier. Either a list or callable that takes
+no args and returns a list with command line arguments.
+Default: [] `
+
+                                                 *codefmt:prettier_executable*
+The path to the prettier executable. String, list, or callable that takes no
+args and returns a string or a list. The default uses npx if available, so
+that the repository-local prettier will have priority.
+Default: function('s:LookupPrettierExecutable') `
+
+                                                     *codefmt:rustfmt_options*
+Command line arguments to feed rustfmt. Either a list or callable that takes
+no args and returns a list with command line arguments.
+Default: [] `
+
+                                                  *codefmt:rustfmt_executable*
+The path to the rustfmt executable.
+Default: 'rustfmt' `
+
+                                                      *codefmt:zprint_options*
+Command line arguments to feed zprint. Either a list or callable that takes no
+args and returns a list with command line arguments. The default configures
+zprint with Vim's textwidth.
+Default: function('s:ZprintOptions') `
+
+                                                   *codefmt:zprint_executable*
+The path to the zprint executable. Typically this is one of the native images
+(zprintl or zprintm) from https://github.com/kkinnear/zprint/releases
+installed as zprint.
+Default: 'zprint' `
+
+                                              *codefmt:fish_indent_executable*
+The path to the fish_indent executable.
+Default: 'fish_indent' `
+
+                                              *codefmt:nixpkgs_fmt_executable*
+The path to the nixpkgs-fmt executable.
+Default: 'nixpkgs-fmt' `
+
+                                      *codefmt:luaformatterfiveone_executable*
+The path to the luaformatterfiveone executable.
+Default: 'luaformatterfiveone' `
+
+                                                 *codefmt:cljstyle_executable*
+The path to the cljstyle executable.
+Default: 'cljstyle' `
+
+                                                    *codefmt:plugin[autocmds]*
+Configures whether plugin/autocmds.vim should be loaded.
+Default: 1 `
+
+                                                    *codefmt:plugin[commands]*
+Configures whether plugin/commands.vim should be loaded.
+Default: 1 `
+
+                                                    *codefmt:plugin[mappings]*
+Configures whether plugin/mappings.vim should be loaded.
+Default: 0 `
+
+                                                    *codefmt:plugin[register]*
+Configures whether plugin/register.vim should be loaded.
+Default: 1 `
+
+                                                         *b:codefmt_formatter*
+You can override the default formatter by defining this variable. For
+instance, to explicitly select the clang-format formatter for Java, add
+>
+  autocmd FileType java let b:codefmt_formatter = 'clang-format'
+<
+to your vimrc. You can also set the value to an empty string to disable all
+formatting.
+
+==============================================================================
+COMMANDS                                                    *codefmt-commands*
+
+:[range]FormatLines [formatter]                                 *:FormatLines*
+  Format the current line or range using [formatter].
+  [formatter] is the default formatter associated with the current buffer if
+  omitted.
+
+:FormatCode [formatter]                                          *:FormatCode*
+  Format the whole buffer using [formatter]. See |codefmt-formatters| for list
+  of valid formatters.
+  [formatter] is the default formatter associated with the current buffer if
+  omitted.
+
+:AutoFormatBuffer [formatter]                              *:AutoFormatBuffer*
+  Enables format on save for this buffer using [formatter]. Also configures
+  [formatter] as the default formatter for this buffer via the
+  |b:codefmt_formatter| variable.
+  [formatter] is the default formatter associated with the current buffer if
+  omitted.
+
+:NoAutoFormatBuffer                                      *:NoAutoFormatBuffer*
+  Disables format on save for this buffer.
+
+==============================================================================
+AUTOCOMMANDS                                                *codefmt-autocmds*
+
+You can enable automatic formatting on a buffer using |:AutoFormatBuffer|.
+
+==============================================================================
+MAPPINGS                                                    *codefmt-mappings*
+
+This plugin provides default mappings that can be enabled via the
+plugin[mappings] flag. You can enable them under the default prefix of
+<Leader>= (<Leader> being "\" by default) or set the plugin[mappings] flag to
+an explicit prefix to use. Or you can define your own custom mappings; see
+plugin/mappings.vim for inspiration.
+
+To format the whole buffer, use <PREFIX>b.
+
+Some formatters also support formatting ranges. There are several mappings for
+formatting ranges that mimic vim's built-in |operator|s:
+  * Format the current line with the <PREFIX>= mapping.
+  * <PREFIX> by itself acts as an |operator|. Use <PREFIX><MOTION> to format
+    over any motion. For instance, <PREFIX>i{ will format all lines inside the
+    enclosing curly braces.
+  * In visual mode, <PREFIX> will format the visual selection.
+
+==============================================================================
+RECOMMENDED ZPRINT MAPPINGS                          *codefmt-mappings-zprint*
+
+
+Since zprint only works on top-level Clojure forms, it doesn't make sense to
+format line ranges that aren't complete forms. If you're using vim-sexp
+(https://github.com/guns/vim-sexp), the following mapping replaces the default
+"format the current line" with "format the current top-level form."
+>
+  autocmd FileType clojure nmap <buffer> <silent> <leader>== <leader>=iF
+<
+
+==============================================================================
+DICTIONARIES                                                   *codefmt-dicts*
+
+                                                           *codefmt.Formatter*
+Interface for applying formatting to lines of code.  Formatters are registered
+with codefmt using maktaba's standard extension registry:
+>
+  let l:codefmt_registry = maktaba#extension#GetRegistry('codefmt')
+  call l:codefmt_registry.AddExtension(l:formatter)
+<
+
+Formatters define these fields:
+  * name (string): The formatter name that will be exposed to users.
+  * setup_instructions (string, optional): A string explaining to users how to
+    make the plugin available if not already available.
+and these functions:
+  * IsAvailable() -> boolean: Whether the formatter is fully functional with
+    all dependencies available. Returns 0 only if setup_instructions have not
+    been followed.
+  * AppliesToBuffer() -> boolean: Whether the current buffer is of a type
+    normally formatted by this formatter. Normally based on 'filetype', but
+    could depend on buffer name or other properties.
+and should implement at least one of the following functions:
+  * Format(): Formats the current buffer directly.
+  * FormatRange({startline}, {endline}): Formats the current buffer, focusing
+    on the range of lines from {startline} to {endline}.
+  * FormatRanges({ranges}): Formats the current buffer, focusing on the given
+    ranges of lines. Each range should be a 2-item list of
+    [startline,endline].
+Formatters should implement the most specific format method that is supported.
+
+==============================================================================
+FUNCTIONS                                                  *codefmt-functions*
+
+codefmt#FormatMap({type})                                *codefmt#FormatMap()*
+  Suitable for use as 'operatorfunc'; see |g@| for details. The type is
+  ignored since formatting only works on complete lines.
+
+codefmt#formatterhelpers#Format({cmd})     *codefmt#formatterhelpers#Format()*
+  Format lines in the current buffer via a formatter invoked by {cmd}, which
+  is a system call represented by either a |maktaba.Syscall| or any argument
+  accepted by |maktaba#syscall#Create()|. The command must include any
+  arguments for the explicit range line numbers to use, if any.
+
+  Throws ERROR(ShellError) if the {cmd} system call fails
+
+codefmt#formatterhelpers#AttemptFakeRangeFormatting({startline}, {endline},
+  {cmd})               *codefmt#formatterhelpers#AttemptFakeRangeFormatting()*
+  Attempt to format a range of lines from {startline} to {endline} in the
+  current buffer via a formatter that doesn't natively support range
+  formatting, which is invoked via {cmd} (a system call represented by either
+  a |maktaba.Syscall| or any argument accepted by |maktaba#syscall#Create()|).
+  It uses a hacky strategy of sending those lines to the formatter in
+  isolation, which gives bad results if the code on those lines isn't a
+  self-contained block of syntax or is part of a larger indent.
+
+  If invoking this hack, please make sure to file a feature request against
+  the tool for range formatting and post a URL for that feature request above
+  code that calls it.
+
+  Throws ERROR(ShellError) if the {cmd} system call fails
+
+codefmt#formatterhelpers#ResolveFlagToArray({flag_name})
+                               *codefmt#formatterhelpers#ResolveFlagToArray()*
+  Resolve a flag (function, string or array) to a normalized array, with
+  special handling to convert a spaceless string to a single-element array.
+  This is the common case for executables, and more importantly, is
+  backward-compatible for existing user settings.
+
+  Throws ERROR(WrongType) if the flag doesn't resolve to a string or array
+
+
+vim:tw=78:ts=8:ft=help:norl:

@@ -1,0 +1,36 @@
+Describe :ReplAuto
+    Before each
+        call Cleanup()
+    End
+
+    It automatically sends current buffer input to REPL in terminal
+        let bufnr = bufnr('%')
+        ReplAuto node
+
+        Assert Exists('b:reply__auto_repl')
+
+        " Cursor does not move
+        Assert Equals(bufnr, bufnr('%'), printf('bufnr=%d, %%=%d, terms=%s', bufnr, bufnr('%'), TermList()))
+
+        " Emulate key input
+        call setline('.', ['function foo() {}', ''])
+        normal! G
+        doautocmd CursorMovedI
+
+        " Note: themis.vim does not seem to support insert mode
+
+        let bufnr = TermList()[0]
+        Assert True(WithTimeout(1, {-> len(GetTermLine(bufnr, 1, '$')) == 4}))
+        Assert Equals(
+            \   GetTermLine(bufnr, 1, '$')[-3:],
+            \   LinesInTerm('> function foo() {}', 'undefined', '> ')
+            \ )
+
+        ReplStop
+        Assert Empty(TermList())
+        " It takes some time to fire exit_cb after the terminal process is
+        " killed.
+        Assert True(WithTimeout(1, {-> !exists('b:reply__auto_repl')}), 'b:reply__auto_repl exists after 1sec')
+        Assert False(exists('#plugin-reply-auto#CursorHoldI'), '#plugin-reply-auto#CursorHoldI exists after :ReplStop')
+    End
+End

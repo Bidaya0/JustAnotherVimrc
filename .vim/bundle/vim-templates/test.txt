@@ -1,0 +1,39 @@
+{{COMPANY}}
+{{COPYRIGHT}}
+{{DATE}}
+{{DATE}}/{{MONTH}}/{{YEAR}}
+{{DAY}}
+{{DAY_FULL}}
+{{EMAIL}}
+{{FILE}}
+{{FILEE}}
+{{FILEF}}
+{{FILER}}
+{{FILED}}
+{{HOSTNAME}}
+{{LICENSE}}
+{{CURSOR}}
+{{MONTH}}
+{{MONTH_FULL}}
+{{MONTH_SHORT}}
+{{NAME}}
+{{PROJECT}}
+{{TIME}}
+{{TIME_12}}
+{{TIMESTAMP}}
+{{TODAY}}
+{{YEAR}}
+
+#ifndef {{MACRO_GUARD}}
+#define {{MACRO_GUARD}}
+
+
+#endif // {{MACRO_GUARD}}
+
+#ifndef {{MACRO_GUARD_FULL}}
+#define {{MACRO_GUARD_FULL}}
+
+
+#endif // {{MACRO_GUARD_FULL}}
+
+{{LICENSE_FILE}}
