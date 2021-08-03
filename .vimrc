@@ -61,7 +61,7 @@ Plugin 'plasticboy/vim-markdown'
 "monakai theme
 Plugin 'phanviet/vim-monokai-pro'
 "terminal
-Plugin 'skywind3000/vim-terminal-help'
+"Plugin 'skywind3000/vim-terminal-help'
 
 "autocomplete
 Plugin 'Valloric/YouCompleteMe'
