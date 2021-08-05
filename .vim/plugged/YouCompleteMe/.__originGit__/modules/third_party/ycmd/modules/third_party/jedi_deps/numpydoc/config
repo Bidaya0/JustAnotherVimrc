@@ -1,0 +1,15 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	worktree = ../../../../../../../../third_party/ycmd/third_party/jedi_deps/numpydoc
+[remote "origin"]
+	url = https://github.com/numpy/numpydoc
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[submodule "doc/scipy-sphinx-theme"]
+	active = true
+	url = https://github.com/scipy/scipy-sphinx-theme

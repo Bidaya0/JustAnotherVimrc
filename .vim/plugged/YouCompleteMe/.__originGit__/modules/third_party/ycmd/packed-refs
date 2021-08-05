@@ -1,0 +1,9 @@
+# pack-refs with: peeled fully-peeled sorted 
+1827ebee82fd41dac408ffe4c7b1e867ac72ee7c refs/remotes/origin/auto
+f20bf47f94be99afed2188c753dc8ae9fa41e245 refs/remotes/origin/azure-pipelines
+8f2c91d92065928d63c1a84d64d3837e02b88daf refs/remotes/origin/clang-format
+51b8998c82ff2c7ec02faa97f10de69735af66d9 refs/remotes/origin/legacy-py2
+0784f9e91ff09bc1af68d676afc82fa4b58fa16d refs/remotes/origin/master
+0346bbe1b21d39a034e94842e8b4a79c2abeb6a5 refs/remotes/origin/no-webhook
+3ff3101f2c4d067210b01ca8d3294d6ad50e60fb refs/remotes/origin/signature-help
+ec9087b7ddcc9ca7f9bba4a75d39131646a4df07 refs/remotes/origin/try

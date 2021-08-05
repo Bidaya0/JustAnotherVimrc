@@ -25,18 +25,19 @@ set nowrap
 set noswapfile
 filetype plugin indent on
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+"set rtp+=~/.vim/bundle/Vundle.vim
+"call vundle#begin()
+call plug#begin('~/.vim/plugged')
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+"Plugin 'VundleVim/Vundle.vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
@@ -51,61 +52,61 @@ Plugin 'tpope/vim-fugitive'
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 
 "For markdown 
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
 
 "MANAGER actully i dont need it
 "Plugin 'preservim/nerdtree'
 
 "monakai theme
-Plugin 'phanviet/vim-monokai-pro'
+Plug 'phanviet/vim-monokai-pro'
 "terminal
 "Plugin 'skywind3000/vim-terminal-help'
 
 "autocomplete
-Plugin 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 "Plugin 'neoclide/coc.nvim', {'branch': 'release'}
-Plugin 'elixir-editors/vim-elixir'
+Plug 'elixir-editors/vim-elixir'
 
 "Plugin 'vim-syntastic/syntastic'
-Plugin 'mtscout6/syntastic-local-eslint.vim'
-Plugin 'nvie/vim-flake8'
-Plugin 'dense-analysis/ale'
+Plug 'mtscout6/syntastic-local-eslint.vim'
+Plug 'nvie/vim-flake8'
+Plug 'dense-analysis/ale'
 
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Add maktaba and codefmt to the runtimepath.
 " (The latter must be installed before it can be used.)
-Plugin 'google/vim-maktaba'
-Plugin 'google/vim-codefmt'
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
 " Also add Glaive, which is used to configure codefmt's maktaba flags. See
 " `:help :Glaive` for usage.
 "Plugin 'google/vim-glaive'
 
-Plugin 'terryma/vim-multiple-cursors'
+Plug 'terryma/vim-multiple-cursors'
 
 "like ctrlp
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 
 "Plugin 'honza/vim-snippets'
 
 "fold
-Plugin 'pseewald/vim-anyfold'
+Plug 'pseewald/vim-anyfold'
 
 "git
-Plugin 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 
 "REPL
-Plugin 'rhysd/reply.vim'
+Plug 'rhysd/reply.vim'
 "rainbow ()
-Plugin 'luochen1990/rainbow'
+Plug 'luochen1990/rainbow'
 
-Plugin 'ekalinin/Dockerfile.vim'
+Plug 'ekalinin/Dockerfile.vim'
 
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
 "Plugin 'goerz/jupytext.vim'
 "Plugin 'szymonmaszke/vimpyter'
@@ -114,12 +115,12 @@ Plugin 'tpope/vim-surround'
 "Plugin 'puremourning/vimspector'
 
 "templates 
-Plugin 'tibabit/vim-templates'
+Plug 'tibabit/vim-templates'
 
-
+call plug#end()
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+"call vundle#end()            " required
+"filetype plugin indent on    " required
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*

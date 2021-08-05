@@ -1,0 +1,15 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	worktree = ../../../../../../../../third_party/ycmd/third_party/watchdog_deps/pathtools
+[remote "origin"]
+	url = https://github.com/gorakhargosh/pathtools
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[submodule "docs/source/_themes"]
+	active = true
+	url = git://github.com/mitsuhiko/flask-sphinx-themes.git
