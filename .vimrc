@@ -66,7 +66,7 @@ Plug 'phanviet/vim-monokai-pro'
 
 "autocomplete
 Plug 'Valloric/YouCompleteMe'
-"Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'elixir-editors/vim-elixir'
 
 "Plugin 'vim-syntastic/syntastic'
