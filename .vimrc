@@ -62,11 +62,14 @@ Plug 'plasticboy/vim-markdown'
 "monakai theme
 Plug 'phanviet/vim-monokai-pro'
 "terminal
-"Plugin 'skywind3000/vim-terminal-help'
+Plug 'skywind3000/vim-terminal-help'
 
 "autocomplete
 Plug 'Valloric/YouCompleteMe'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', { 'branch': 'master', 'do': 'yarn install --frozen-lockfile' }
+"Plug 'pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build' }
+
 Plug 'elixir-editors/vim-elixir'
 
 "Plugin 'vim-syntastic/syntastic'

@@ -9,4 +9,5 @@
 ######################################################################
 
 merge-sub-gits local
+git status
 merge-sub-gits origin -l
