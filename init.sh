@@ -10,4 +10,4 @@
 
 
 ln ./.vimrc ~/.vimrc
-ln -s ./vim ~/.vim
+ln -s `realpath ./.vim` `realpath ~/.vim`
