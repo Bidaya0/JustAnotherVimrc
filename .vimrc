@@ -91,7 +91,7 @@ Plug 'google/vim-codefmt'
 Plug 'terryma/vim-multiple-cursors'
 
 "like ctrlp
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', {'do': {-> fzf#install()}}
 Plug 'junegunn/fzf.vim'
 
 "Plugin 'honza/vim-snippets'
