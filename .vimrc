@@ -24,6 +24,29 @@ set incsearch
 set nowrap
 set noswapfile
 filetype plugin indent on
+
+if $VIM_USE_PROXY == 'TRUE'
+	let useproxy = 1
+else
+	let useproxy = 0
+endif
+
+if useproxy
+	let proxycommand = ''
+else
+	let proxycommand = 'proxychains4 -q'
+endif
+
+
+" Check And Init Vim-Plug
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!'.proxycommand.' curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+
+
 " set the runtime path to include Vundle and initialize
 "set rtp+=~/.vim/bundle/Vundle.vim
 "call vundle#begin()
@@ -65,7 +88,7 @@ Plug 'phanviet/vim-monokai-pro'
 Plug 'skywind3000/vim-terminal-help'
 
 "autocomplete
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', { 'do': proxycommand.' ./install.py' }
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'neoclide/coc.nvim', { 'branch': 'master', 'do': 'yarn install --frozen-lockfile' }
 "Plug 'pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build' }
@@ -91,7 +114,7 @@ Plug 'google/vim-codefmt'
 Plug 'terryma/vim-multiple-cursors'
 
 "like ctrlp
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf',{ 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 "Plugin 'honza/vim-snippets'
@@ -194,6 +217,9 @@ noremap <F3> :FormatLines<CR>
 noremap <F4> :Repl<CR>
 
 
+
+"template setting
+let g:tmpl_search_paths = ['~/.vim-templates']
 
 
 
