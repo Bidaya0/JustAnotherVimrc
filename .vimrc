@@ -23,6 +23,7 @@ set smartcase
 set incsearch
 set nowrap
 set noswapfile
+set t_RV=
 filetype plugin indent on
 
 if $VIM_USE_PROXY == 'TRUE'
