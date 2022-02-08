@@ -118,6 +118,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/fzf',{ 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+
 "Plugin 'honza/vim-snippets'
 
 "fold
@@ -216,8 +217,9 @@ let g:ale_linters = {'python': ['flake8', 'pylint']}
 noremap <F2> :ALEToggle<CR>
 noremap <F3> :FormatLines<CR>
 noremap <F4> :Repl<CR>
-
-
+noremap <F5> :YcmCompleter GoTo<CR>
+"let g:ale_linters = {'kotlin': ['ktlint', 'languageserver', 'android']}
+"let g:ale_kotlin_languageserver_executable = '~/.lsp/kotlin-language-server/server/build/install/server/bin/kotlin-language-server'
 
 "template setting
 let g:tmpl_search_paths = ['~/.vim-templates']
@@ -226,6 +228,12 @@ let g:tmpl_search_paths = ['~/.vim-templates']
 
 
 let g:rainbow_active = 1
+
+"YCM settings 
+"let g:ycm_language_server = [{  'name': 'kotlin','filetypes': [ 'kotlin'],'cmdline': [ '~/.lsp/kotlin-language-server/server/build/install/server/bin/kotlin-language-server']}]
+"let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+
+
 "call maktaba#plugin#Install(maktaba#path#Join([maktaba#Maktaba().location]))
 "call glaive#Install()
 "Glaive codefmt plugin[mappings]
@@ -253,7 +261,6 @@ set foldlevel=99 " Open all folds
 
 "vimspector
 "let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
-
 
 " jupyternotebook
 "let g:jupytext_command = 'notedown'
