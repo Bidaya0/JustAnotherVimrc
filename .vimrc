@@ -104,6 +104,8 @@ Plug 'dense-analysis/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+Plug 'jpalardy/vim-slime'
+
 " Add maktaba and codefmt to the runtimepath.
 " (The latter must be installed before it can be used.)
 Plug 'google/vim-maktaba'
@@ -258,6 +260,13 @@ autocmd Filetype * AnyFoldActivate               " activate for all filetypes
 "set foldlevel=0  " close all folds
 " or
 set foldlevel=99 " Open all folds
+
+
+"vim-slime
+let g:slime_target = "vimterminal"
+let g:slime_vimterminal_cmd = "command"
+let g:slime_vimterminal_config = {"term_finish": "close"}
+
 
 "vimspector
 "let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
