@@ -1,0 +1,22 @@
+on: [push]
+
+jobs:
+  build-dockerimage:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:5.7
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: password
+        options: >-
+          --health-cmd "mysqladmin ping --silent"
+          --health-interval 10s
+          --health-timeout 180s
+          --health-retries 10
+    name: build-dockerimage
+    steps:
+      - name: Build docker image
+	      run: |
+          docker build -t vimwithplug:test .
