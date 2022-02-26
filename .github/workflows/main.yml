@@ -5,6 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     name: build-dockerimage
     steps:
+      - name: Check out code
+        uses: actions/checkout@v2
       - name: Build docker image
         run: |
           ls
