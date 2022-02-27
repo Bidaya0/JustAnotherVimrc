@@ -18,7 +18,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build to local
-        run:
+        run: |
           docker build -t bidaya0/just-another-vim-image:${{ steps.githash.outputs.git_hash }} .
           docker build -t bidaya0/just-another-vim-image:latest .
           docker push bidaya0/just-another-vim-image:${{ steps.githash.outputs.git_hash }}
