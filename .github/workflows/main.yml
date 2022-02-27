@@ -6,6 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     name: build-dockerimage
     steps:
+      - name: Get git hash
+        id: githash
+        run: echo "::set-output name=git_hash::$GITHUB_SHA"
       - name: Check out code
         uses: actions/checkout@v2
       - name: Login to DockerHub
@@ -19,5 +22,5 @@ jobs:
           context: .
           load: true
           tags: |
-            bidaya0/just-another-vim-image:${{ GITHUB_SHA }}
+            bidaya0/just-another-vim-image:${{ steps.githash.outputs.git_hash }}
             bidaya0/just-another-vim-image:latest
