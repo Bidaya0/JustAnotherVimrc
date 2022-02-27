@@ -89,7 +89,7 @@ Plug 'phanviet/vim-monokai-pro'
 Plug 'skywind3000/vim-terminal-help'
 
 "autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': ' ./install.py' }
+Plug 'Valloric/YouCompleteMe', { 'do': 'python3 ./install.py' }
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'neoclide/coc.nvim', { 'branch': 'master', 'do': 'yarn install --frozen-lockfile' }
 "Plug 'pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build' }
