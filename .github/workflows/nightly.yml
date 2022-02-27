@@ -16,10 +16,10 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build to local
+      - name: Build to DockerHub
         uses: docker/build-push-action@v2
         with:
           context: .
-          load: true
+          push: true
           tags: |
             bidaya0/just-another-vim-image:nightly-${{ steps.date.outputs.date }}
