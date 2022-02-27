@@ -26,17 +26,17 @@ set noswapfile
 set t_RV=
 filetype plugin indent on
 
-if $VIM_USE_PROXY == 'TRUE'
-	let useproxy = 1
-else
-	let useproxy = 0
-endif
-
-if useproxy
-	let proxycommand = ''
-else
-	let proxycommand = 'proxychains4 -q'
-endif
+#if $VIM_USE_PROXY == 'TRUE'
+#	let useproxy = 1
+#else
+#	let useproxy = 0
+#endif
+#
+#if useproxy
+#	let proxycommand = ''
+#else
+#	let proxycommand = 'proxychains4 -q'
+#endif
 
 
 " Check And Init Vim-Plug
