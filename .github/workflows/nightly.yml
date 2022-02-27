@@ -1,11 +1,14 @@
 on: 
-  push:
-    branches: [ main ]
+  schedule:
+  - cron: "0 0 0 * *"
 jobs:
   build-dockerimage:
     runs-on: ubuntu-latest
     name: build-dockerimage
     steps:
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       - name: Check out code
         uses: actions/checkout@v2
       - name: Login to DockerHub
@@ -19,5 +22,4 @@ jobs:
           context: .
           load: true
           tags: |
-            bidaya0/just-another-vim-image:${GITHUB_SHA}
-            bidaya0/just-another-vim-image:latest
+            bidaya0/just-another-vim-image:nightly-${{ steps.date.outputs.date }}
