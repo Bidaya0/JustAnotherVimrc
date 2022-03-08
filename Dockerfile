@@ -1,5 +1,5 @@
 FROM thinca/vim:latest-full-alpine
-
+ENV TERM=xterm-256color
 COPY . /root
 RUN apk add curl
 RUN apk add git
