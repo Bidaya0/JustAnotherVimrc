@@ -11,4 +11,4 @@ RUN apk add linux-headers
 RUN curl -fLo ~/vim/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim 
 RUN vim +PlugInstall +qa
 RUN python3 /root/.vim/plugged/YouCompleteMe/install.py
-ENTRYPOINT vim
+ENTRYPOINT ["vim"]
