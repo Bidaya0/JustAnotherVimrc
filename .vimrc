@@ -100,7 +100,7 @@ Plug 'elixir-editors/vim-elixir'
 "Plugin 'vim-syntastic/syntastic'
 Plug 'mtscout6/syntastic-local-eslint.vim'
 Plug 'nvie/vim-flake8'
-Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale', { 'do': 'pip3 install bandit pylint flake8'}
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -216,7 +216,7 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_lint_on_enter = 0
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
-let g:ale_linters = {'python': ['flake8', 'pylint']}
+let g:ale_linters = {'python': ['flake8', 'pylint','bandit']}
 noremap <F2> :ALEToggle<CR>
 noremap <F3> :FormatLines<CR>
 noremap <F4> :Repl<CR>
