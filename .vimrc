@@ -110,7 +110,7 @@ Plug 'jpalardy/vim-slime'
 " Add maktaba and codefmt to the runtimepath.
 " (The latter must be installed before it can be used.)
 Plug 'google/vim-maktaba'
-Plug 'google/vim-codefmt'
+Plug 'google/vim-codefmt', { 'do': 'pip3 install yapf'}
 " Also add Glaive, which is used to configure codefmt's maktaba flags. See
 " `:help :Glaive` for usage.
 "Plugin 'google/vim-glaive'
