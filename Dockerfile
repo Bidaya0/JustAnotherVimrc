@@ -16,6 +16,7 @@ RUN nix-env -i vim
 #RUN nix-env -i vimPlugins.ale
 RUN nix-env -i pylint
 RUN nix-env -i pipenv
+RUN nix-env -i curl
 
 #RUN nix-env -i python310Packages.bandit
 #RUN nix-env -i python310Packages.flake8
