@@ -6,8 +6,8 @@ RUN nix-channel  --update
 RUN nix-env -i oh-my-zsh
 RUN nix-env -i git
 RUN nix-env -i fzf
-RUN nix-env -i linuxHeaders
-RUN nix-env -i pipr
+#RUN nix-env -iA nixos.linuxHeaders
+RUN nix-env -i vim
 RUN nix-env -i vimPlugins.vim-plug
 RUN nix-env -i vimPlugins.vim-fugitive
 RUN nix-env -i vimPlugins.tabular
