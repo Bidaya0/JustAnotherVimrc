@@ -6,7 +6,7 @@ RUN apk add git
 RUN apk add build-base
 RUN apk add cmake
 RUN apk add fzf
-RUN apk add python3-dev
+RUN apk add python3-dev || true
 RUN apk add linux-headers
 RUN apk add py3-pip
 RUN apk add zsh
