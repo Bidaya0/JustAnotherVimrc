@@ -1,4 +1,4 @@
-FROM thinca/vim:v9.0.0095-full-alpine
+FROM thinca/vim:v9.0.0087-full-alpine
 ENV TERM=xterm-256color
 COPY . /root
 RUN apk add curl
