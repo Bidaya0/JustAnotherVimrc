@@ -7,9 +7,9 @@ RUN apk add build-base
 RUN apk add cmake
 RUN apk add fzf
 RUN apk add python3-dev || true
-RUN apk add linux-headers
-RUN apk add py3-pip
-RUN apk add zsh
+RUN apk add linux-headers || true
+RUN apk add py3-pip || true
+RUN apk add zsh || true
 RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 RUN curl -fLo ~/vim/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim 
 #RUN vim +PlugInstall +qa
