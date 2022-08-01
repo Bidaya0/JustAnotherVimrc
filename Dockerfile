@@ -1,6 +1,7 @@
 FROM nixos/nix 
 ENV TERM=xterm-256color
 COPY . /root
+RUN nix-channel --add  https://nixos.org/channels/nixos-22.05
 RUN nix-channel  --update
 RUN nix-env -i nixos.oh-my-zsh
 RUN nix-env -i nixos.git
