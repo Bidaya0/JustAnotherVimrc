@@ -15,8 +15,10 @@ RUN nix-env -i vim
 #RUN nix-env -i vimPlugins.vim-monokai-pro
 #RUN nix-env -i vimPlugins.ale
 RUN nix-env -i pylint
-RUN nix-env -i python310Packages.bandit
-RUN nix-env -i python310Packages.flake8
+RUN nix-env -i pipenv
+
+#RUN nix-env -i python310Packages.bandit
+#RUN nix-env -i python310Packages.flake8
 #RUN nix-env -i vimPlugins.vim-airline
 #RUN nix-env -i vimPlugins.vim-airline-themes
 #RUN nix-env -i vimPlugins.vim-slime
