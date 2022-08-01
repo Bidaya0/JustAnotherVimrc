@@ -1,7 +1,6 @@
 FROM nixos/nix 
 ENV TERM=xterm-256color
 COPY . /root
-RUN echo "environment.systemPackages = with pkgs; [ vim ];" >> /etc/nix/nix.conf
 RUN nix-channel --add  https://nixos.org/channels/nixos-22.05
 RUN nix-channel  --update
 RUN nix-env -i oh-my-zsh
